@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install dependencies
+      run: |
+        pip install poetry
+        poetry install
+        sudo apt-get install fish
+
+    - name: Lint the codebase
+      run: ./plute-dev lint
+
+    - name: Test
+      run: ./plute-dev test
