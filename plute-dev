@@ -12,9 +12,9 @@ end
 
 function lint_extra
     set -l err 0
-    poetry run pylint --rcfile ./.pylintrc ./plute ./scripts ./tests || set err 1
+    poetry run pylint --rcfile ./.pylintrc ./plute ./tests || set err 1
     poetry run bandit -r ./plute || set err 1
-    poetry run vulture ./plute ./scripts ./tests || set err 1
+    poetry run vulture ./plute ./tests || set err 1
     return $err
 end
 
