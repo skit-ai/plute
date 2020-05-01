@@ -5,9 +5,12 @@ nav:
 
 theme:
   favicon: assets/favicon.png
-  logo:
-    icon: forum
+  icon:
+    logo: material/forum
+    repo: fontawesome/brands/git-alt
   name: material
+  features:
+    - instant
   palette:
     primary: cyan
     accent: cyan
