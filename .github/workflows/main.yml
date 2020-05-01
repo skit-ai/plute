@@ -15,7 +15,7 @@ jobs:
     
     - name: Install dependencies
       run: |
-        pip install poetry
+        pip3 install poetry
         poetry install
         sudo apt-get install fish
 
