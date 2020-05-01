@@ -3,6 +3,14 @@ site_name: Plute
 nav:
   - Home: index.md
 
+repo_name: Vernacular-ai/plute
+repo_url: https://github.com/Vernacular-ai/plute
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/Vernacular-ai
+
 theme:
   favicon: assets/favicon.png
   icon:
