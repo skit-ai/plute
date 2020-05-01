@@ -23,7 +23,7 @@ jobs:
         sudo apt-get install fish
 
     - name: Install plute dependencies
-        poetry install
+      run: poetry install
 
     - name: Lint
       run: ./plute-dev lint
