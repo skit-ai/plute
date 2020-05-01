@@ -1,0 +1,6 @@
+[flake8]
+ignore = E501,D200,D202,D203,D204,D205,D400,D103,D102,D107,D104,D100
+exclude = .git,__pycache__,docs,build,dist
+inline-quotes = double
+multiline-quotes = double
+docstring-quotes = double

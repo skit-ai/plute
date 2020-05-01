@@ -1,0 +1,61 @@
+#!/usr/bin/env fish
+
+function usage
+    echo "plute-dev: Development assistance for plute"
+    echo "plute-dev lint [--full]"
+    echo "plute-dev test [rest-pytest-args...]"
+    echo
+    echo "Options:"
+    echo "  --full               run optional linters too"
+    echo "  (--help|-h)          print this help message"
+end
+
+function lint_extra
+    set -l err 0
+    poetry run pylint --rcfile ./.pylintrc ./plute ./scripts ./tests || set err 1
+    poetry run bandit -r ./plute || set err 1
+    poetry run vulture ./plute ./scripts ./tests || set err 1
+    return $err
+end
+
+function lint_min
+    set -l err 0
+    poetry run flake8 ./plute || set err 1
+    poetry run mypy ./plute || set err 1
+    return $err
+end
+
+function pytest
+    poetry run pytest --cov=plute --disable-warnings $argv
+end
+
+# Argument parsing and entry point
+
+argparse -n plute-dev "h/help" "f-full" -- $argv
+
+if test ! $status -eq 0
+    exit 1
+end
+
+if test (count $argv) -lt 1
+    usage
+    exit 1
+end
+
+if set -q _flag_h
+    usage
+else
+    switch $argv[1]
+        case lint
+            if set -q _flag_full
+                lint_min && lint_extra
+            else
+                lint_min
+            end
+        case test
+            pytest $argv[2..-1]
+        case "*"
+            usage
+            exit 1
+    end
+end
