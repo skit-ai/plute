@@ -26,7 +26,8 @@ def flatten_alternatives(alternatives_list: List[List[Dict]], field="transcript"
 
 def serialize_alternatives(alternatives_list: List[List[Dict]], field="transcript") -> str:
     """
-    A string representation of a list of strings, useful for feature creation.
+    Serialize a list of strings to string.
+    Useful for feature creation.
     :param alternatives_list: Represents ASR transcription output.
     :param field: The field within alternatives that contains text.
     :return:

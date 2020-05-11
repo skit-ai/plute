@@ -7,9 +7,9 @@ from exegr import GroupRegexMatch
 
 def regex_group_search(patterns: List[str]) -> Callable:
     """
-    Compiles a list of regex-patterns.
-    Returns a function that allows pattern matching in a list of strings.
+    Compile list of regex-patterns.
 
+    Returns a function that allows pattern matching in a list of strings.
     [[WARN]]: Negative look-(ahead|behind) patterns will fail.
 
     :param patterns: Regular expression patters.
@@ -21,7 +21,7 @@ def regex_group_search(patterns: List[str]) -> Callable:
         """
         Match a previously compiled list of patterns.
 
-        Returns a list of the same size as number of patterns compiled.
+        This function returns a list of the same size as number of patterns compiled.
         A scoring function grades each pattern on the basis of:
         - How frequently was a pattern seen across texts.
         - The span of that pattern for each string in the texts.
