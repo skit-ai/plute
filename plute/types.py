@@ -16,4 +16,4 @@ class Intent:
 
 Transcript = str
 Alternative = Dict
-Utterances = List[List[Alternative]]
+Utterance = List[Alternative]
