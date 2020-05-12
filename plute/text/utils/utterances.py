@@ -13,7 +13,7 @@ as alternatives.
 import itertools
 from functools import reduce
 from operator import mul
-from typing import List, Optional
+from typing import List, Any
 from plute.types import Utterances, Transcript
 
 
@@ -60,7 +60,7 @@ def merge_utterances(utterances: Utterances) -> Utterances:
     return [[utterance for _, utterance in merged]]
 
 
-def are_utterances_null(utterances: List[Optional[List]]) -> bool:
+def are_utterances_null(utterances: List[Any]) -> bool:
     return (not utterances) or (utterances == [[]])
 
 
