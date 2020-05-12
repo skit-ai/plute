@@ -1,16 +1,40 @@
-from unittest import TestCase
+import pytest
 from plute.text.utils.alternatives import flatten_alternatives, serialize_alternatives
 
 
-class Test(TestCase):
-    def test_flatten_alternatives(self):
-        target = [f"text {i}" for i in range(5)]
-        test_input = [[{"transcript": f"text {i}"} for i in range(5)]]
-        test_output = flatten_alternatives(test_input, text_only=True)
-        self.assertEqual(target, test_output, "Test failed: flatten_alternatives happy case failed.")
+flatten_alternatives_test_cases = [
+    (
+        [[{"transcript": f"text_{i}"}] for i in range(5)],
+        True,
+        [f"text_{i}" for i in range(5)]
+    ),
+    (
+        [[{"transcript": f"text_{i}"}] for i in range(5)],
+        False,
+        [{"transcript": f"text_{i}"} for i in range(5)]
+    )
+]
 
-    def test_serialize_alternatives(self):
-        target = "<s> text_1 <s></s> text_2 <s></s> text_3 </s>"
-        test_input = [[{"transcript": "text_1"}, {"transcript": "text_2"}, {"transcript": "text_3"}]]
-        test_output = serialize_alternatives(test_input)
-        self.assertEqual(target, test_output, "Test failed: serialize_alternatives - happy case failed.")
+
+@pytest.mark.parametrize("alternatives, text_only, expected", flatten_alternatives_test_cases)
+def test_flatten_alternatives(alternatives, text_only, expected):
+    test_output = flatten_alternatives(alternatives, text_only=text_only)
+    assert test_output == expected
+
+
+serialize_alternatives_test_cases = [
+    (
+        [[{"transcript": f"text_{i}"}] for i in range(1, 4)],
+        "<s> text_1 <s></s> text_2 <s></s> text_3 </s>"
+    ),
+    (
+        [[{"transcript": f"<UNK>_{i} <UNK>_{(i + 1)}"}] for i in range(1, 4)],
+        "<s> <UNK>_1 <UNK>_2 <s></s> <UNK>_2 <UNK>_3 <s></s> <UNK>_3 <UNK>_4 </s>"
+    )
+]
+
+
+@pytest.mark.parametrize("alternatives, expected", serialize_alternatives_test_cases)
+def test_serialize_alternatives(alternatives, expected):
+    test_output = serialize_alternatives(alternatives)
+    assert test_output == expected
