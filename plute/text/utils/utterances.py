@@ -14,10 +14,10 @@ import itertools
 from functools import reduce
 from operator import mul
 from typing import List, Any
-from plute.types import Utterances, Transcript
+from plute.types import Utterance, Transcript
 
 
-def merge_utterances(utterances: Utterances) -> Utterances:
+def merge_utterances(utterances: List[Utterance]) -> List[Utterance]:
     """
     Merge utterances into a single utterance.
 
@@ -64,7 +64,7 @@ def are_utterances_null(utterances: List[Any]) -> bool:
     return (not utterances) or (utterances == [[]])
 
 
-def utterances_to_texts(utterances: Utterances) -> List[Transcript]:
+def utterances_to_texts(utterances: List[Utterance]) -> List[Transcript]:
     """
     Return list of texts from single utterance alternatives. If there are more
     than one utterances, we only pick the first one.
@@ -76,14 +76,3 @@ def utterances_to_texts(utterances: Utterances) -> List[Transcript]:
         return [alternative["transcript"] for alternative in utterances[0]]
 
     return []
-
-
-def serialize_utterances(utterances: Utterances) -> str:
-    """
-    Serialize a list of strings to string.
-    Useful for feature creation.
-    """
-    flat_alternatives = utterances_to_texts(merge_utterances(utterances))
-    if not flat_alternatives:
-        return ""
-    return "<s> " + " <s></s> ".join(flat_alternatives) + " </s>"
