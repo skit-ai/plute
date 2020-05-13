@@ -1,14 +1,8 @@
 """
-This module provides functions that work on ASR alternatives described as:
+This module provides functions that work on ASR utterances (refer to plute.types) described as:
 ```
 [[{"transcript": "..."}]]
 ```
-We call these alternatives_list.
-and
-```
-[{"transcript": "..."}]
-```
-as alternatives.
 """
 import itertools
 from functools import reduce
