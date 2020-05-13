@@ -1,5 +1,5 @@
 # plute
 
-![CI](https://github.com/Vernacular-ai/plute/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/Vernacular-ai/plute/workflows/CI/badge.svg?branch=master) ![PyPI](https://img.shields.io/pypi/v/plute?style=plastic)
 
 Framework for building SLU systems.
