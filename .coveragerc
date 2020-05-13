@@ -1,0 +1,4 @@
+[run]
+omit =
+    plute/base.py
+    plute/types.py

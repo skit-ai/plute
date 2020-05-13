@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List, Dict
 
 
 @dataclass(frozen=True)
@@ -12,3 +12,8 @@ class Intent:
     name: str
     parser: str
     score: Optional[float] = None
+
+
+Transcript = str
+Alternative = Dict
+Utterance = List[Alternative]
